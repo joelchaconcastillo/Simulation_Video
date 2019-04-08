@@ -1,0 +1,26 @@
+1|2017/06/15 18:46:10 => Start of the debug
+2|2017/06/15 18:46:10 => Reading parameter file demo/input/Param_02D.cfg
+3|2017/06/15 18:46:10 => Parser:get_int:nvar_wfg=2
+4|2017/06/15 18:46:10 => Parser:get_int:nobj=2
+5|2017/06/15 18:46:10 => Parser:get_int:npos=1
+6|2017/06/15 18:46:10 => Benchmark:test function WFG5
+7|2017/06/15 18:46:10 => Benchmark:variables: 2
+8|2017/06/15 18:46:10 => Benchmark:objective functions: 2
+9|2017/06/15 18:46:10 => Benchmark:constraints: 0
+10|2017/06/15 18:46:10 => Benchmark:position parameters: 1
+11|2017/06/15 18:46:10 => Benchmark:encoding: 1
+12|2017/06/15 18:46:10 => Benchmark:lower bound ( 0.000000 0.000000)
+13|2017/06/15 18:46:10 => Benchmark:upper bound ( 1.000000 1.000000)
+14|2017/06/15 18:46:10 => Parser:get_char:output=/home/user_demo/Chacon/Tesis/MOMBI-II/
+15|2017/06/15 18:46:10 => EMO_MPI is not defined
+16|2017/06/15 18:46:10 => Parser:get_char:seed=/home/user_demo/Chacon/Tesis/MOMBI-II/demo/input/seed2.dat
+17|2017/06/15 18:46:10 => EMO_Rand:skipping 0 seeds
+18|2017/06/15 18:46:10 => EMO_Rand:Setting the seed                    1
+19|2017/06/15 18:46:10 => Parser:get_int:feval=100000
+20|2017/06/15 18:46:10 => Parser:get_int:psize=100
+21|2017/06/15 18:46:10 => Parser:get_int:plot=1
+22|2017/06/15 18:46:10 => Parser:get_char:term=x11
+23|2017/06/15 18:46:10 => Parser:get_int:debug=0
+24|2017/06/15 18:46:12 => Total execution time: 1s.916052
+25|2017/06/15 18:46:12 => Number of objective function evaluations: 100000
+26|2017/06/15 18:46:12 => Performance indicator of the Pareto front: 0.000000
