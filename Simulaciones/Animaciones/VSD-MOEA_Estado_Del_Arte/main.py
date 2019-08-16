@@ -52,7 +52,9 @@ for NameFile in VariablesFiles:
 #------------------------------------------------------------
 # set up figure and animation
 fig = plt.figure(figsize=(15,10))
-fig.text(0.51, 0.14, 'Local \n optima', ha='center', va='center')
+fig.text(0.51, 0.14, 'Local \n optimum', ha='center', va='center')
+fig.text(0.51, 0.73, 'Local \n optimum', ha='center', va='center')
+fig.text(0.51, 0.34, 'Global \n optimum', ha='center', va='center')
 #fig.set_size_inches(100, 100)
 #mng = plt.get_current_fig_manager()
 #fig.frame.Maximize(True)
