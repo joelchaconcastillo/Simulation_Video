@@ -15,12 +15,12 @@ import matplotlib.animation as animation
 ##------------------------------------------
 #Read the input file whose is composed of first general header
 #and each individuals in objective space
-ObjectivesFiles = ['Sample_Visual_Video/VSD_MOEA_V1_obj','Sample_Visual_Video/NSGAII_obj', 'Sample_Visual_Video/GDE3_obj', 'Sample_Visual_Video/MOEAD_obj', 'Sample_Visual_Video/SMSEMOA_obj', 'Sample_Visual_Video/MOMBI2_obj']
-VariablesFiles = ['Sample_Visual_Video/VSD_MOEA_V1_var','Sample_Visual_Video/NSGAII_var', 'Sample_Visual_Video/GDE3_var', 'Sample_Visual_Video/MOEAD_var', 'Sample_Visual_Video/SMSEMOA_var','Sample_Visual_Video/MOMBI2_var']
+ObjectivesFiles = ['Sample_Visual_Video/VSD_MOEA_obj','Sample_Visual_Video/NSGAII_obj', 'Sample_Visual_Video/MOEAD_obj', 'Sample_Visual_Video/MOMBI2_obj']
+VariablesFiles = ['Sample_Visual_Video/VSD_MOEA_var','Sample_Visual_Video/NSGAII_var', 'Sample_Visual_Video/MOEAD_var', 'Sample_Visual_Video/MOMBI2_var']
 
 
-names = ['VSD-MOEA', 'NSGA-II', 'GDE3', 'MOEA\D', 'SMS-EMOA', 'MOMBI-II']
-colr =['blue', 'red','green','magenta', 'cyan', 'gray']
+names = ['VSD-MOEA', 'NSGA-II', 'MOEA\D', 'R2-EMOA']
+colr =['blue', 'red','green', 'black']
 Instance = 'Instance WFG5'
 SizePool=100
 NumberSamples = 1000
@@ -93,7 +93,8 @@ for tmp in VariablesFiles:
 IndexPop=0
 individualsObj = {}
 individualsVar = {}
-Colours = ['bo','ro', 'go', 'mo', 'co', 'wo']
+#Colours = ['bo','ro', 'go', 'mo', 'co', 'wo']
+Colours = ['bo','ro', 'go', 'ko']
 i = 0
 for NameFile in ObjectivesFiles:
 	individualsObj[NameFile], = ObjectiveSpace.plot([], [], Colours[i], ms=6)
@@ -111,7 +112,7 @@ def init():
        individualsVar[NameFile].set_data([], [])
     time_textObj.set_text(Instance)
     time_textVar.set_text(Instance)
-    return individualsObj['Sample_Visual_Video/VSD_MOEA_V1_obj'], individualsObj['Sample_Visual_Video/NSGAII_obj'], individualsObj['Sample_Visual_Video/GDE3_obj'], individualsObj['Sample_Visual_Video/MOEAD_obj'], individualsObj['Sample_Visual_Video/SMSEMOA_obj'], individualsObj['Sample_Visual_Video/MOMBI2_obj'],individualsVar['Sample_Visual_Video/VSD_MOEA_V1_var'],individualsVar['Sample_Visual_Video/NSGAII_var'],individualsVar['Sample_Visual_Video/GDE3_var'],individualsVar['Sample_Visual_Video/MOEAD_var'], individualsVar['Sample_Visual_Video/SMSEMOA_var'], individualsVar['Sample_Visual_Video/MOMBI2_var'], time_textObj, time_textVar,
+    return individualsObj['Sample_Visual_Video/VSD_MOEA_obj'], individualsObj['Sample_Visual_Video/NSGAII_obj'], individualsObj['Sample_Visual_Video/MOEAD_obj'], individualsObj['Sample_Visual_Video/MOMBI2_obj'], individualsVar['Sample_Visual_Video/VSD_MOEA_var'], individualsVar['Sample_Visual_Video/NSGAII_var'], individualsVar['Sample_Visual_Video/MOEAD_var'], individualsVar['Sample_Visual_Video/MOMBI2_var'], time_textObj, time_textVar,
 
 
 def animate(i):
@@ -126,20 +127,20 @@ def animate(i):
        individualsVar[NameFile].set_data(fi, fj)
     Generation = i
     gn = Generation + 1
-    time_textObj.set_text(u'Espacio objetivo \nGeneración: %d \n' % gn )
-    time_textVar.set_text(u'Espacio de las variables \nGeneración: %d \n' % gn )
-    return individualsObj['Sample_Visual_Video/VSD_MOEA_V1_obj'], individualsObj['Sample_Visual_Video/NSGAII_obj'], individualsObj['Sample_Visual_Video/GDE3_obj'], individualsObj['Sample_Visual_Video/MOEAD_obj'], individualsObj['Sample_Visual_Video/SMSEMOA_obj'], individualsObj['Sample_Visual_Video/MOMBI2_obj'],individualsVar['Sample_Visual_Video/VSD_MOEA_V1_var'],individualsVar['Sample_Visual_Video/NSGAII_var'],individualsVar['Sample_Visual_Video/GDE3_var'],individualsVar['Sample_Visual_Video/MOEAD_var'], individualsVar['Sample_Visual_Video/SMSEMOA_var'], individualsVar['Sample_Visual_Video/MOMBI2_var'], time_textObj, time_textVar,
+    time_textObj.set_text(u'Objective Space \nCurrent Generation: %d \n' % gn )
+    time_textVar.set_text(u'Decision Variable Space \nCurrent Generation: %d \n' % gn )
+    return individualsObj['Sample_Visual_Video/VSD_MOEA_obj'], individualsObj['Sample_Visual_Video/NSGAII_obj'], individualsObj['Sample_Visual_Video/MOEAD_obj'], individualsObj['Sample_Visual_Video/MOMBI2_obj'],individualsVar['Sample_Visual_Video/VSD_MOEA_var'],individualsVar['Sample_Visual_Video/NSGAII_var'], individualsVar['Sample_Visual_Video/MOEAD_var'], individualsVar['Sample_Visual_Video/MOMBI2_var'], time_textObj, time_textVar,
 
-#ani = animation.FuncAnimation(fig, animate, frames= NumberSamples,
-#                              interval=200, blit=True, init_func=init)
+ani = animation.FuncAnimation(fig, animate, frames= NumberSamples,
+                              interval=200, blit=True, init_func=init)
 
-animate(999)
+#animate(999)
 # save the animation as an mp4.  This requires ffmpeg or mencoder to be
 # installed.  The extra_args ensure that the x264 codec is used, so that
 # the video can be embedded in html5.  You may need to adjust this for
 # your system: for more information, see
 # http://matplotlib.sourceforge.net/api/animation_api.html
 #ani.save('particle_box.mp4', fps=30, extra_args=['-vcodec', 'libx264'])
-#ani.save('Simulation_WFG5.mp4')
-plt.savefig('Simulacion_Algoritmo_5.eps', format='eps', dpi=1000)
+ani.save('Simulation_WFG5.mp4')
+#plt.savefig('Simulacion_Algoritmo_5.eps', format='eps', dpi=1000)
 plt.show()
