@@ -15,8 +15,8 @@ import matplotlib.animation as animation
 ##------------------------------------------
 #Read the input file whose is composed of first general header
 #and each individuals in objective space
-ObjectivesFiles = ['Sample_Visual_Video/VSD_MOEA_obj','Sample_Visual_Video/NSGAII_obj', 'Sample_Visual_Video/MOEAD_obj', 'Sample_Visual_Video/MOMBI2_obj']
-VariablesFiles = ['Sample_Visual_Video/VSD_MOEA_var','Sample_Visual_Video/NSGAII_var', 'Sample_Visual_Video/MOEAD_var', 'Sample_Visual_Video/MOMBI2_var']
+ObjectivesFiles = ['Sample_Visual_Video/VSD_MOEA_obj','Sample_Visual_Video/NSGAII_obj', 'Sample_Visual_Video/MOEAD_obj', 'Sample_Visual_Video/R2_EMOA_obj']
+VariablesFiles = ['Sample_Visual_Video/VSD_MOEA_var','Sample_Visual_Video/NSGAII_var', 'Sample_Visual_Video/MOEAD_var', 'Sample_Visual_Video/R2_EMOA_var']
 
 
 names = ['VSD-MOEA', 'NSGA-II', 'MOEA\D', 'R2-EMOA']
@@ -52,6 +52,7 @@ for NameFile in VariablesFiles:
 #------------------------------------------------------------
 # set up figure and animation
 fig = plt.figure(figsize=(15,10))
+fig.text(0.51, 0.14, 'Local \n optima', ha='center', va='center')
 #fig.set_size_inches(100, 100)
 #mng = plt.get_current_fig_manager()
 #fig.frame.Maximize(True)
@@ -63,6 +64,8 @@ i = 0
 for tmp in ObjectivesFiles:
    ObjectiveSpace.set_ylim(0, 5.5)
    ObjectiveSpace.set_xlim(0, 5)
+   ObjectiveSpace.set_xlabel('$f_1(x)$')
+   ObjectiveSpace.set_ylabel('$f_2(x)$')
    ObjectiveSpace.text(0.95, y, names[i],
         verticalalignment='bottom', horizontalalignment='right',
         transform=ObjectiveSpace.transAxes,
@@ -76,6 +79,8 @@ i = 0
 for tmp in VariablesFiles:
    VariableSpace.set_ylim(-0.2, 5)
    VariableSpace.set_xlim(0, 3)
+   VariableSpace.set_xlabel('$x_1$')
+   VariableSpace.set_ylabel('$x_2$')
    VariableSpace.text(0.95, y, names[i],
         verticalalignment='bottom', horizontalalignment='right',
         transform=VariableSpace.transAxes,
@@ -112,7 +117,7 @@ def init():
        individualsVar[NameFile].set_data([], [])
     time_textObj.set_text(Instance)
     time_textVar.set_text(Instance)
-    return individualsObj['Sample_Visual_Video/VSD_MOEA_obj'], individualsObj['Sample_Visual_Video/NSGAII_obj'], individualsObj['Sample_Visual_Video/MOEAD_obj'], individualsObj['Sample_Visual_Video/MOMBI2_obj'], individualsVar['Sample_Visual_Video/VSD_MOEA_var'], individualsVar['Sample_Visual_Video/NSGAII_var'], individualsVar['Sample_Visual_Video/MOEAD_var'], individualsVar['Sample_Visual_Video/MOMBI2_var'], time_textObj, time_textVar,
+    return individualsObj['Sample_Visual_Video/VSD_MOEA_obj'], individualsObj['Sample_Visual_Video/NSGAII_obj'], individualsObj['Sample_Visual_Video/MOEAD_obj'], individualsObj['Sample_Visual_Video/R2_EMOA_obj'], individualsVar['Sample_Visual_Video/VSD_MOEA_var'], individualsVar['Sample_Visual_Video/NSGAII_var'], individualsVar['Sample_Visual_Video/MOEAD_var'], individualsVar['Sample_Visual_Video/R2_EMOA_var'], time_textObj, time_textVar,
 
 
 def animate(i):
@@ -129,7 +134,7 @@ def animate(i):
     gn = Generation + 1
     time_textObj.set_text(u'Objective Space \nCurrent Generation: %d \n' % gn )
     time_textVar.set_text(u'Decision Variable Space \nCurrent Generation: %d \n' % gn )
-    return individualsObj['Sample_Visual_Video/VSD_MOEA_obj'], individualsObj['Sample_Visual_Video/NSGAII_obj'], individualsObj['Sample_Visual_Video/MOEAD_obj'], individualsObj['Sample_Visual_Video/MOMBI2_obj'],individualsVar['Sample_Visual_Video/VSD_MOEA_var'],individualsVar['Sample_Visual_Video/NSGAII_var'], individualsVar['Sample_Visual_Video/MOEAD_var'], individualsVar['Sample_Visual_Video/MOMBI2_var'], time_textObj, time_textVar,
+    return individualsObj['Sample_Visual_Video/VSD_MOEA_obj'], individualsObj['Sample_Visual_Video/NSGAII_obj'], individualsObj['Sample_Visual_Video/MOEAD_obj'], individualsObj['Sample_Visual_Video/R2_EMOA_obj'],individualsVar['Sample_Visual_Video/VSD_MOEA_var'],individualsVar['Sample_Visual_Video/NSGAII_var'], individualsVar['Sample_Visual_Video/MOEAD_var'], individualsVar['Sample_Visual_Video/R2_EMOA_var'], time_textObj, time_textVar,
 
 ani = animation.FuncAnimation(fig, animate, frames= NumberSamples,
                               interval=200, blit=True, init_func=init)
