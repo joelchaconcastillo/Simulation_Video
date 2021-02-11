@@ -1,11 +1,11 @@
 %%Replacement Phase
-N =10000
+N =100
 Min = -10;
 Max = 10;
 
 %%Initialization
 Population = Min + rand(N, 2)*(Max-Min);
-Di=5
+Di=1
 
 x = Min:0.2:Max;
 y = Min:0.2:Max;
@@ -17,9 +17,9 @@ Z = -X.^2 - Y.^2;
 %Z = sin(X) + cos(Y);
 figure
 s = contour(X,Y,Z,'ShowText','on');
-%hold on
+hold on
 %Z = (1-X).^2 + 100*(Y-X.^2).^2;
-pcr=0.9
+pcr=0.1
 count = 0
 %Ranks = zeros(500,2)
 s=[]
@@ -48,10 +48,8 @@ while count < 1
          
 %  s = scatter( Population(:,1),Population(:,2), 10, 'filled');
         s = scatter( diff(:,1) , diff(:,2), 10, 'filled');
-  pause(0.1)
-    hold on
-
-
+  pause(1)
+%    hold on
 
 end
 

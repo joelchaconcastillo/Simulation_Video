@@ -1,11 +1,11 @@
 %%Replacement Phase
-N =500
+N =100
 Min = -10;
 Max = 10;
 
 %%Initialization
 Population = Min + rand(N, 2)*(Max-Min);
-Di=5
+Di=0.1
 
 x = Min:0.2:Max;
 y = Min:0.2:Max;
@@ -23,13 +23,12 @@ s = contour(X,Y,Z,'ShowText','on');
 %Evaluate points
 
 Penalized = []
-pause(5)
+pause(1)
 count = 0
 %Ranks = zeros(500,2)
 while count < N
     Niche_i = []
     F = sin(Population(:,1)) + cos(Population(:,2));
- 
   while size(Population,1) > 0
     %Select the best individual with max fitness
     [Reference_Point, I] = max(F);
@@ -56,10 +55,11 @@ while count < N
  Population = Penalized
  Penalized=[]
     %Ranks(i) = Niche_i
-  s = scatter( Niche_i(:,1),Niche_i(:,2), 90, 'filled');
-    %hold on
-     pause(5)
-
+  %  s = contour(X,Y,Z,'ShowText','on');
+ % hold on
+    s = scatter( Niche_i(:,1),Niche_i(:,2), 90, 'filled');
+    %hold all
+pause(1)
 end
 
 

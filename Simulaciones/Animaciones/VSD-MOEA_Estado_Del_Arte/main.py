@@ -15,17 +15,18 @@ import matplotlib.animation as animation
 ##------------------------------------------
 #Read the input file whose is composed of first general header
 #and each individuals in objective space
-ObjectivesFiles = ['Sample_Visual_Video/VSD_MOEA_obj','Sample_Visual_Video/NSGAII_obj', 'Sample_Visual_Video/MOEAD_obj', 'Sample_Visual_Video/R2_EMOA_obj']
-VariablesFiles = ['Sample_Visual_Video/VSD_MOEA_var','Sample_Visual_Video/NSGAII_var', 'Sample_Visual_Video/MOEAD_var', 'Sample_Visual_Video/R2_EMOA_var']
+ObjectivesFiles = ['Sample_Visual_Video/R2_EMOA_obj', 'Sample_Visual_Video/VSD_MOEA_obj']
+VariablesFiles = ['Sample_Visual_Video/R2_EMOA_var', 'Sample_Visual_Video/VSD_MOEA_var']
 
 
-names = ['VSD-MOEA', 'NSGA-II', 'MOEA\D', 'R2-EMOA']
-colr =['blue', 'red','green', 'black']
+names = ['R2-EMOA', 'VSD-MOEA']
+colr =['black', 'green']
 Instance = 'Instance WFG5'
 SizePool=100
 NumberSamples = 1000
 NumberObjectives = 2
 Generation = 1
+Report = np.append(np.arange(1,9),np.arange(9, NumberSamples, 10))
 def FilterData(filename, SizePool):
 	with open(filename) as f:
 	    data = f.read()
@@ -65,7 +66,7 @@ y = 0.95
 i = 0
 for tmp in ObjectivesFiles:
    ObjectiveSpace.set_ylim(0, 5.5)
-   ObjectiveSpace.set_xlim(0, 5)
+   ObjectiveSpace.set_xlim(0, 3.0)
    ObjectiveSpace.set_xlabel('$f_1(x)$')
    ObjectiveSpace.set_ylabel('$f_2(x)$')
    ObjectiveSpace.text(0.95, y, names[i],
@@ -101,14 +102,15 @@ IndexPop=0
 individualsObj = {}
 individualsVar = {}
 #Colours = ['bo','ro', 'go', 'mo', 'co', 'wo']
-Colours = ['bo','ro', 'go', 'ko']
+#Colours = ['r^', 'gx', 'k|', 'bo']
+Colours = ['ko', 'go']
 i = 0
 for NameFile in ObjectivesFiles:
-	individualsObj[NameFile], = ObjectiveSpace.plot([], [], Colours[i], ms=6)
+	individualsObj[NameFile], = ObjectiveSpace.plot([], [], Colours[i], ms=4)
 	i = i+1
 i = 0
 for NameFile in VariablesFiles:
-	individualsVar[NameFile], = VariableSpace.plot([], [], Colours[i], ms=6)
+	individualsVar[NameFile], = VariableSpace.plot([], [], Colours[i], ms=4)
 	i = i+1
 
 def init():
@@ -119,26 +121,29 @@ def init():
        individualsVar[NameFile].set_data([], [])
     time_textObj.set_text(Instance)
     time_textVar.set_text(Instance)
-    return individualsObj['Sample_Visual_Video/VSD_MOEA_obj'], individualsObj['Sample_Visual_Video/NSGAII_obj'], individualsObj['Sample_Visual_Video/MOEAD_obj'], individualsObj['Sample_Visual_Video/R2_EMOA_obj'], individualsVar['Sample_Visual_Video/VSD_MOEA_var'], individualsVar['Sample_Visual_Video/NSGAII_var'], individualsVar['Sample_Visual_Video/MOEAD_var'], individualsVar['Sample_Visual_Video/R2_EMOA_var'], time_textObj, time_textVar,
+    return individualsObj['Sample_Visual_Video/R2_EMOA_obj'],individualsObj['Sample_Visual_Video/VSD_MOEA_obj'] , individualsVar['Sample_Visual_Video/R2_EMOA_var'], individualsVar['Sample_Visual_Video/VSD_MOEA_var'], time_textObj, time_textVar,
 
 
 def animate(i):
     """perform animation step"""
     global Generation
+    Generation = Report[i]
     #Read the second header....
     for NameFile in ObjectivesFiles:
-       fi, fj = getObjectives(i, data_obj[NameFile], SizePool)
+       fi, fj = getObjectives(Generation, data_obj[NameFile], SizePool)
        individualsObj[NameFile].set_data(fi, fj)
     for NameFile in VariablesFiles:
-       fi, fj = getObjectives(i, data_var[NameFile], SizePool)
+       fi, fj = getObjectives(Generation, data_var[NameFile], SizePool)
        individualsVar[NameFile].set_data(fi, fj)
-    Generation = i
     gn = Generation + 1
-    time_textObj.set_text(u'Objective Space \nCurrent Generation: %d \n' % gn )
-    time_textVar.set_text(u'Decision Variable Space \nCurrent Generation: %d \n' % gn )
-    return individualsObj['Sample_Visual_Video/VSD_MOEA_obj'], individualsObj['Sample_Visual_Video/NSGAII_obj'], individualsObj['Sample_Visual_Video/MOEAD_obj'], individualsObj['Sample_Visual_Video/R2_EMOA_obj'],individualsVar['Sample_Visual_Video/VSD_MOEA_var'],individualsVar['Sample_Visual_Video/NSGAII_var'], individualsVar['Sample_Visual_Video/MOEAD_var'], individualsVar['Sample_Visual_Video/R2_EMOA_var'], time_textObj, time_textVar,
+    percent = int((100*gn)/NumberSamples)
+    time_textObj.set_text(u'Objective Space \nElapsed Period: %d%% \n' % percent )
+    time_textVar.set_text(u'Decision Variable Space \nElapsed Period: %d%% \n' % percent )
+    return individualsObj['Sample_Visual_Video/R2_EMOA_obj'],individualsObj['Sample_Visual_Video/VSD_MOEA_obj'] , individualsVar['Sample_Visual_Video/R2_EMOA_var'], individualsVar['Sample_Visual_Video/VSD_MOEA_var'], time_textObj, time_textVar,
+    #return individualsObj['Sample_Visual_Video/NSGAII_obj'], individualsObj['Sample_Visual_Video/MOEAD_obj'], individualsObj['Sample_Visual_Video/R2_EMOA_obj'],individualsObj['Sample_Visual_Video/VSD_MOEA_obj'] , individualsVar['Sample_Visual_Video/NSGAII_var'], individualsVar['Sample_Visual_Video/MOEAD_var'], individualsVar['Sample_Visual_Video/R2_EMOA_var'], individualsVar['Sample_Visual_Video/VSD_MOEA_var'], time_textObj, time_textVar,
+    #return individualsObj['Sample_Visual_Video/VSD_MOEA_obj'], individualsObj['Sample_Visual_Video/NSGAII_obj'], individualsObj['Sample_Visual_Video/MOEAD_obj'], individualsObj['Sample_Visual_Video/R2_EMOA_obj'],individualsVar['Sample_Visual_Video/VSD_MOEA_var'],individualsVar['Sample_Visual_Video/NSGAII_var'], individualsVar['Sample_Visual_Video/MOEAD_var'], individualsVar['Sample_Visual_Video/R2_EMOA_var'], time_textObj, time_textVar,
 
-ani = animation.FuncAnimation(fig, animate, frames= NumberSamples,
+ani = animation.FuncAnimation(fig, animate, frames= np.size(Report),
                               interval=200, blit=True, init_func=init)
 
 #animate(999)
