@@ -15,12 +15,12 @@ import matplotlib.animation as animation
 ##------------------------------------------
 #Read the input file whose is composed of first general header
 #and each individuals in objective space
-ObjectivesFiles = ['Sample_Visual_Video/R2_EMOA_obj', 'Sample_Visual_Video/VSD_MOEA_obj']
-VariablesFiles = ['Sample_Visual_Video/R2_EMOA_var', 'Sample_Visual_Video/VSD_MOEA_var']
+ObjectivesFiles = ['Sample_Visual_Video/R2_EMOA_obj', 'Sample_Visual_Video/CPDEA_obj', 'Sample_Visual_Video/VSD_MOEA_obj']
+VariablesFiles = ['Sample_Visual_Video/R2_EMOA_var', 'Sample_Visual_Video/CPDEA_var', 'Sample_Visual_Video/VSD_MOEA_var']
 
 
-names = ['R2-EMOA', 'VSD-MOEA']
-colr =['black', 'green']
+names = ['R2-EMOA', 'CPDEA', 'VSD-MOEA']
+colr =['black', 'cyan', 'green']
 Instance = 'Instance WFG5'
 SizePool=100
 NumberSamples = 1000
@@ -103,7 +103,7 @@ individualsObj = {}
 individualsVar = {}
 #Colours = ['bo','ro', 'go', 'mo', 'co', 'wo']
 #Colours = ['r^', 'gx', 'k|', 'bo']
-Colours = ['ko', 'go']
+Colours = ['kP', 'cv', 'go']
 i = 0
 for NameFile in ObjectivesFiles:
 	individualsObj[NameFile], = ObjectiveSpace.plot([], [], Colours[i], ms=4)
@@ -121,7 +121,7 @@ def init():
        individualsVar[NameFile].set_data([], [])
     time_textObj.set_text(Instance)
     time_textVar.set_text(Instance)
-    return individualsObj['Sample_Visual_Video/R2_EMOA_obj'],individualsObj['Sample_Visual_Video/VSD_MOEA_obj'] , individualsVar['Sample_Visual_Video/R2_EMOA_var'], individualsVar['Sample_Visual_Video/VSD_MOEA_var'], time_textObj, time_textVar,
+    return individualsObj['Sample_Visual_Video/R2_EMOA_obj'],individualsObj['Sample_Visual_Video/CPDEA_obj'],individualsObj['Sample_Visual_Video/VSD_MOEA_obj'] , individualsVar['Sample_Visual_Video/R2_EMOA_var'], individualsVar['Sample_Visual_Video/CPDEA_var'], individualsVar['Sample_Visual_Video/VSD_MOEA_var'], time_textObj, time_textVar,
 
 
 def animate(i):
@@ -139,7 +139,7 @@ def animate(i):
     percent = int((100*gn)/NumberSamples)
     time_textObj.set_text(u'Objective Space \nElapsed Period: %d%% \n' % percent )
     time_textVar.set_text(u'Decision Variable Space \nElapsed Period: %d%% \n' % percent )
-    return individualsObj['Sample_Visual_Video/R2_EMOA_obj'],individualsObj['Sample_Visual_Video/VSD_MOEA_obj'] , individualsVar['Sample_Visual_Video/R2_EMOA_var'], individualsVar['Sample_Visual_Video/VSD_MOEA_var'], time_textObj, time_textVar,
+    return individualsObj['Sample_Visual_Video/R2_EMOA_obj'],individualsObj['Sample_Visual_Video/CPDEA_obj'], individualsObj['Sample_Visual_Video/VSD_MOEA_obj'] , individualsVar['Sample_Visual_Video/R2_EMOA_var'], individualsVar['Sample_Visual_Video/CPDEA_var'], individualsVar['Sample_Visual_Video/VSD_MOEA_var'], time_textObj, time_textVar,
     #return individualsObj['Sample_Visual_Video/NSGAII_obj'], individualsObj['Sample_Visual_Video/MOEAD_obj'], individualsObj['Sample_Visual_Video/R2_EMOA_obj'],individualsObj['Sample_Visual_Video/VSD_MOEA_obj'] , individualsVar['Sample_Visual_Video/NSGAII_var'], individualsVar['Sample_Visual_Video/MOEAD_var'], individualsVar['Sample_Visual_Video/R2_EMOA_var'], individualsVar['Sample_Visual_Video/VSD_MOEA_var'], time_textObj, time_textVar,
     #return individualsObj['Sample_Visual_Video/VSD_MOEA_obj'], individualsObj['Sample_Visual_Video/NSGAII_obj'], individualsObj['Sample_Visual_Video/MOEAD_obj'], individualsObj['Sample_Visual_Video/R2_EMOA_obj'],individualsVar['Sample_Visual_Video/VSD_MOEA_var'],individualsVar['Sample_Visual_Video/NSGAII_var'], individualsVar['Sample_Visual_Video/MOEAD_var'], individualsVar['Sample_Visual_Video/R2_EMOA_var'], time_textObj, time_textVar,
 
